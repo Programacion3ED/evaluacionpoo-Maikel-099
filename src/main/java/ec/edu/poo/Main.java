@@ -33,7 +33,7 @@ public class Main {
 
         System.out.println("Aplicando parche : " + gestor.aplicarParcheActivo("ERROR-404"));
 
-        System.out.println("\n PRUEBA DE LÍMITE DE CAPACIDAD ");
+        System.out.println("\n PRUEBA DE LÍMITE DE capacidad ");
 
         for (int i = 1; i <= 8; i++) {
             Firewall fwTest = new Firewall("TEST-" + i, "Test", 1, true, 10);
