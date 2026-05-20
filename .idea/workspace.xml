@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eec3f446-7eb8-447a-bc55-f7b5c314ff28" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ec/edu/poo/ActivoDigital.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ec/edu/poo/ActivoDigital.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Firewall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Firewall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ec/edu/poo/GestorActivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ec/edu/poo/GestorActivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Servidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Servidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ec/edu/poo/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +34,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",

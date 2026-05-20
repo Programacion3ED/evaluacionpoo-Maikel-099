@@ -43,7 +43,7 @@ public class ActivoDigital {
     }
 
     public boolean isParcheAplicado() {
-        
+
         return false;
     }
 
