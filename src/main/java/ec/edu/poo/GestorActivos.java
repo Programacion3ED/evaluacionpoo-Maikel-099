@@ -21,21 +21,29 @@ public class GestorActivos {
         if (this.contador >= 10) {
             return false;
         }
-        if (buscarPorCodigo(activo.getCodigo()) != null) {
+
+        if (activo.getCodigo() == null || buscarPorCodigo(activo.getCodigo()) != null) {
             return false;
         }
         this.activos[this.contador] = activo;
         this.contador++;
-        return false;
+
+        return true;
     }
 
     public ActivoDigital buscarPorCodigo(String codigo) {
-        for (int i = 0; i < this.contador;i++){
-            if (this.activos[i].getCodigo().equals(codigo)){
+
+        if (codigo == null) {
+            return null;
+        }
+
+        for (int i = 0; i < this.contador; i++){
+
+
+            if (this.activos[i].getCodigo() != null && this.activos[i].getCodigo().equals(codigo)){
                 return this.activos[i];
             }
         }
-
         return null;
     }
 
@@ -46,7 +54,8 @@ public class GestorActivos {
                 criticos++;
             }
         }
-        return 0;
+
+        return criticos;
     }
 
     public double calcularPromedioRiesgo() {
@@ -56,15 +65,17 @@ public class GestorActivos {
         double sumaRiesgo = 0;
         for (int i = 0; i < this.contador; i++){
             sumaRiesgo += this.activos[i].getNivelRiesgo();
-            return sumaRiesgo /this.contador;
         }
-        return 0;
+
+        return sumaRiesgo / this.contador;
     }
 
     public boolean aplicarParcheActivo(String codigo) {
         ec.edu.poo.ActivoDigital activoDigital = buscarPorCodigo(codigo);
-        if (activos != null){
-            aplicarParcheActivo(codigo);
+
+        if (activoDigital != null){
+
+            activoDigital.setParcheAplicado(true);
             return true;
         }
         return false;
@@ -78,3 +89,5 @@ public class GestorActivos {
         return activos;
     }
 }
+
+
