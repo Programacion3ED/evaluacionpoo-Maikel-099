@@ -11,8 +11,7 @@ public class Servidor extends ActivoDigital {
     }
 
     public String getSistemaOperativo() {
-
-        return null;
+        return this.sistemaOperativo;
     }
 
     public void setSistemaOperativo(String sistemaOperativo) {

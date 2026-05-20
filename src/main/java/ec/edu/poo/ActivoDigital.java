@@ -12,12 +12,10 @@ public class ActivoDigital {
         this.nombre = nombre;
         this.nivelRiesgo = nivelRiesgo;
         this.parcheAplicado = parcheAplicado;
-
     }
 
     public String getCodigo() {
-
-        return null;
+        return this.codigo;
     }
 
     public void setCodigo(String codigo) {
@@ -25,8 +23,7 @@ public class ActivoDigital {
     }
 
     public String getNombre() {
-
-        return null;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -34,8 +31,7 @@ public class ActivoDigital {
     }
 
     public int getNivelRiesgo() {
-
-        return 0;
+        return this.nivelRiesgo;
     }
 
     public void setNivelRiesgo(int nivelRiesgo) {
@@ -43,8 +39,7 @@ public class ActivoDigital {
     }
 
     public boolean isParcheAplicado() {
-
-        return false;
+        return this.parcheAplicado;
     }
 
     public void setParcheAplicado(boolean parcheAplicado) {

@@ -11,8 +11,7 @@ public class Firewall extends ActivoDigital {
     }
 
     public int getReglasActivas() {
-
-        return 0;
+        return this.reglasActivas;
     }
 
     public void setReglasActivas(int reglasActivas) {

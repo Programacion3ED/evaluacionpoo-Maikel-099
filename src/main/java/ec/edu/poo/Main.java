@@ -2,45 +2,85 @@ package ec.edu.poo;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("--- INICIANDO PRUEBAS UNITARIAS ---");
 
         GestorActivos gestor = new GestorActivos();
+        int puntosAprobados = 0;
 
-
-        Servidor srv1 = new Servidor("SRV-01", "Servidor Web Principal", 5, true, "Linux");
-        Servidor srv2 = new Servidor("SRV-02", "Base de Datos", 9, false, "Windows Server");
-        Firewall fw1 = new Firewall("FW-01", "Firewall Perimetral", 8, false, 150);
-
-        System.out.println("PRUEBA DE REGISTRO");
-        System.out.println("Registro SRV-01: " + gestor.registrarActivo(srv1));
-        System.out.println("Registro SRV-02: " + gestor.registrarActivo(srv2));
-        System.out.println("Registro FW-01: " + gestor.registrarActivo(fw1));
-
-        System.out.println("\n PRUEBA DE DUPLICADOS");
-        Servidor srvDuplicado = new Servidor("SRV-01", "Clon", 4, false, "Linux");
-        System.out.println("Registrando duplicado SRV-01: " + gestor.registrarActivo(srvDuplicado));
-
-        System.out.println("\n PRUEBA DE REGLAS DE NEGOCIO ");
-
-        System.out.println("Cantidad de activos críticos: " + gestor.contarActivosCriticos());
-
-
-        System.out.println("Promedio de riesgo: " + gestor.calcularPromedioRiesgo());
-
-        System.out.println("\n PRUEBA DE PARCHES");
-        System.out.println("Estado parche SRV-02 antes: " + srv2.isParcheAplicado());
-        System.out.println("Aplicando parche a SRV-02: " + gestor.aplicarParcheActivo("SRV-02"));
-        System.out.println("Estado parche SRV-02 después: " + srv2.isParcheAplicado());
-
-        System.out.println("Aplicando parche : " + gestor.aplicarParcheActivo("ERROR-404"));
-
-        System.out.println("\n PRUEBA DE LÍMITE DE capacidad ");
-
-        for (int i = 1; i <= 8; i++) {
-            Firewall fwTest = new Firewall("TEST-" + i, "Test", 1, true, 10);
-            boolean resultado = gestor.registrarActivo(fwTest);
-            System.out.println("Registrando TEST-" + i + ": " + resultado);
+        if (gestor.obtenerCantidadActivos() == 0 && gestor.calcularPromedioRiesgo() == 0.0) {
+            System.out.println("[OK] Prueba 1: Inicializacion y promedio en vacio correcto.");
+            puntosAprobados++;
         }
 
-        System.out.println("\nTotal de activos finalmente registrados: " + gestor.obtenerCantidadActivos());
+        Servidor servidorLinux = new Servidor("SRV-01", "Servidor Web", 9, false, "Ubuntu 22.04");
+        Firewall firewallCisco = new Firewall("FW-01", "Firewall Perimetral", 7, false, 25);
+
+        if (servidorLinux instanceof ActivoDigital && firewallCisco instanceof ActivoDigital) {
+            System.out.println("[OK] Prueba 2: Herencia en Servidor y Firewall correcta.");
+            puntosAprobados++;
+        }
+
+        boolean reg1 = gestor.registrarActivo(servidorLinux);
+        boolean reg2 = gestor.registrarActivo(firewallCisco);
+
+        if (reg1 && reg2 && gestor.obtenerCantidadActivos() == 2) {
+            System.out.println("[OK] Prueba 3: Registro basico de activos exitoso.");
+            puntosAprobados++;
+        }
+
+        Servidor servidorDuplicado = new Servidor("SRV-01", "Servidor Clon", 4, false, "Windows");
+        boolean regDuplicado = gestor.registrarActivo(servidorDuplicado);
+
+        if (!regDuplicado && gestor.obtenerCantidadActivos() == 2) {
+            System.out.println("[OK] Prueba 4: Control de codigos duplicados correcto.");
+            puntosAprobados++;
+        }
+
+        ActivoDigital encontrado = gestor.buscarPorCodigo("SRV-01");
+        ActivoDigital noEncontrado = gestor.buscarPorCodigo("CODIGO-FALSO");
+
+        if (encontrado != null && encontrado.getNombre().equals("Servidor Web") && noEncontrado == null) {
+            System.out.println("[OK] Prueba 5: Busqueda secuencial correcta.");
+            puntosAprobados++;
+        }
+
+        if (gestor.contarActivosCriticos() == 1) {
+            System.out.println("[OK] Prueba 6: Conteo de activos criticos correcto.");
+            puntosAprobados++;
+        }
+
+        if (gestor.calcularPromedioRiesgo() == 8.0) {
+            System.out.println("[OK] Prueba 7: Calculo de promedio aritmetico correcto.");
+            puntosAprobados++;
+        }
+
+        boolean parcheOk = gestor.aplicarParcheActivo("SRV-01");
+        boolean parcheFail = gestor.aplicarParcheActivo("CODIGO-INEXISTENTE");
+
+        if (parcheOk && servidorLinux.isParcheAplicado() && !parcheFail) {
+            System.out.println("[OK] Prueba 8: Aplicacion de parches correcta.");
+            puntosAprobados++;
+        }
+
+        for (int i = 0; i < 8; i++) {
+            gestor.registrarActivo(new Servidor("SRV-FILL-" + i, "Servidor de Relleno", 5, false, "Linux"));
+        }
+
+        Servidor servidorOnce = new Servidor("SRV-11", "Excedente", 4, false, "Linux");
+        boolean regExcedente = gestor.registrarActivo(servidorOnce);
+
+        if (!regExcedente && gestor.obtenerCantidadActivos() == 10) {
+            System.out.println("[OK] Prueba 9: Restriccion de capacidad maxima (10) validada.");
+            puntosAprobados++;
+        }
+
+        gestor.reiniciar();
+        if (gestor.obtenerCantidadActivos() == 0 && gestor.obtenerActivos()[0] == null) {
+            System.out.println("[OK] Prueba 10: Limpieza y reinicio del gestor completado.");
+            puntosAprobados++;
+        }
+
+        System.out.println("\n--- RESULTADOS ---");
+        System.out.println("Pruebas superadas: " + puntosAprobados + " / 10");
     }
 }
