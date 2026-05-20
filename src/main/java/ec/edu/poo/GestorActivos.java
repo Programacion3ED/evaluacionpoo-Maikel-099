@@ -8,35 +8,65 @@ public class GestorActivos {
     private int contador;
 
     public GestorActivos() {
-        // TODO: inicializar arreglo y contador
+        this.activos = new ActivoDigital[10];
+        this.contador = 0;
     }
 
     public void reiniciar() {
-        // TODO: reiniciar arreglo y contador
+        this.activos = new ActivoDigital[10];
+        this.contador = 0;
     }
 
     public boolean registrarActivo(ActivoDigital activo) {
-        // TODO: registrar si hay espacio y si el código no existe
+        if (this.contador >= 10) {
+            return false;
+        }
+        if (buscarPorCodigo(activo.getCodigo()) != null) {
+            return false;
+        }
+        this.activos[this.contador] = activo;
+        this.contador++;
         return false;
     }
 
     public ActivoDigital buscarPorCodigo(String codigo) {
-        // TODO: búsqueda secuencial por código
+        for (int i = 0; i < this.contador;i++){
+            if (this.activos[i].getCodigo().equals(codigo)){
+                return this.activos[i];
+            }
+        }
+
         return null;
     }
 
     public int contarActivosCriticos() {
-        // TODO: contar activos con nivelRiesgo >= 8
+        int criticos = 0;
+        for (int i = 0; i < this.contador; i++) {
+            if (this.activos[i].getNivelRiesgo() >= 8){
+                criticos++;
+            }
+        }
         return 0;
     }
 
     public double calcularPromedioRiesgo() {
-        // TODO: calcular promedio de riesgo
+        if (this.contador == 0){
+            return 0.0;
+        }
+        double sumaRiesgo = 0;
+        for (int i = 0; i < this.contador; i++){
+            sumaRiesgo += this.activos[i].getNivelRiesgo();
+            return sumaRiesgo /this.contador;
+        }
         return 0;
     }
 
     public boolean aplicarParcheActivo(String codigo) {
-        // TODO: buscar activo y cambiar parcheAplicado a true
+        ec.edu.poo.ActivoDigital activoDigital = buscarPorCodigo(codigo);
+        if (activos != null){
+            aplicarParcheActivo(codigo);
+            return true;
+        }
         return false;
     }
 

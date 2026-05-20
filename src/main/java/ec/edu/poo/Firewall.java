@@ -7,15 +7,15 @@ public class Firewall extends ActivoDigital {
     public Firewall(String codigo, String nombre, int nivelRiesgo,
                     boolean parcheAplicado, int reglasActivas) {
         super(codigo, nombre, nivelRiesgo, parcheAplicado);
-        // TODO: completar constructor
+        this.reglasActivas = reglasActivas;
     }
 
     public int getReglasActivas() {
-        // TODO: completar
+
         return 0;
     }
 
     public void setReglasActivas(int reglasActivas) {
-        // TODO: completar
+        this.reglasActivas = reglasActivas;
     }
 }
